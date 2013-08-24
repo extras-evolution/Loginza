@@ -1,6 +1,8 @@
 <?php
+//loginza
+//0.1
 global $modx;
-include_once('assets/lib/json.php');   // подключение библиотеки для парсинга JSON, путь можно указать свой
+include_once('assets/libs/json.php');   // подключение библиотеки для парсинга JSON, путь можно указать свой
 mt_srand(microtime());
 
 // конфигурация по-умолчанию //
