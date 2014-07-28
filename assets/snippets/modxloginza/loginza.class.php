@@ -54,7 +54,12 @@ class MODxLoginza
 
         if(empty($ldata->nickname)) $lnick = $luid; else $lnick = $ldata->nickname;
         // здесь нужно помещать обработку для отдельных провайдеров:
-        if($ltype=='openid.yandex.ru') $ltype = 'yandex.ru';
+        // [lambrusco] 29.05.2013
+        if (strpos($ltype, 'openid.yandex.ru') !== false) {
+                        $ltype = 'yandex.ru';
+                        $identityArr = explode('/', $ldata->identity);
+                        $lnick =  $identityArr[count($identityArr)-2];
+                }       
 
         $this->User = array();
         $this->User['username'] = $lnick.'@'.$ltype;
