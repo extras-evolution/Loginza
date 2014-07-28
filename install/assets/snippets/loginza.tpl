@@ -12,4 +12,4 @@
  * @internal    @installset base, sample
  */
 
-return require MODX_BASE_PATH.'assets/snippets/loginza/snippet.loginza.php';
+return require MODX_BASE_PATH.'assets/snippets/modxloginza/snippet.loginza.php';
