@@ -76,7 +76,36 @@ class MODxLoginza
         //то устанавливается "левый-подставной"
         //_НЕ ОТСЫЛАЙТЕ НА НЕГО ПОЧТУ!_
         if(isset($ldata->email)) $this->User['email'] = $ldata->email;
-          else $this->User['email'] = $this->User['username'];
+          else {                        // [lambrusco] 29.05.2013
+                        // обтабатываем различные исключительные ситуации
+                        // вконтакте не возвращает адрес электронной почты, и т.д.
+                        $preg_template_vk = '/([0-9]*@vk.com)/';
+                        if (preg_match($preg_template_vk, $this->User['username'])) {
+                                // опа, нет мыла, тогда запихаем пользователя в группу email_request
+                                if (trim($groups) !== '') 
+                                {
+                                        $groups .= ",email_request";
+                                } 
+                                else 
+                                {
+                                        $groups = "email_request";                              
+                                }
+                                // адрес уникальный, значит, нам подходит
+                                $this->User['email'] = $this->User['username'];
+                        } 
+                        elseif ($ltype == 'yandex.ru')
+                        {
+                                // ранее мы получили корректный email для yandex
+                                $this->User['email'] = $this->User['username'];                         
+                        }       
+                        else
+                        {
+                                // обрабатываем подобные варианты развития событий для других провайдеров
+                                // z-z-z...
+                                // а пока что
+                                $this->User['email'] = $this->User['username'];
+                        }
+                }
 
 
         if(isset($ldata->name->full_name))
