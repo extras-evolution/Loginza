@@ -1,5 +1,5 @@
 ﻿<?
-/* v0.4
+/* v0.5
 *Использованы части кода WebloginPE
 *Raymond Irving, Scotty Delicious
 *
