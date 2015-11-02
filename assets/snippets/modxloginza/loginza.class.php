@@ -212,7 +212,7 @@ class MODxLoginza
 
         //записываем в историю
         $dbname = $modx->db->config['dbase'];
-        if (mysql_num_rows(mysql_query("show tables from $dbname like 'modx_log_history'"))==0)
+        if ($modx->db->getRecordCount($modx->db->query("show tables from $dbname like 'modx_log_history'"))==0)
         {
             $sql = "CREATE TABLE modx_log_history (id INT(11) NOT NULL AUTO_INCREMENT,user_name VARCHAR(100) NOT NULL, ip VARCHAR(100), stamp INT(11), PRIMARY KEY (id))";
             $modx->db->query($sql);
